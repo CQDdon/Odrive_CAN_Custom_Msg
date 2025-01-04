@@ -11,18 +11,18 @@ find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 
 ############################################################
-#Publisher
-add_executable(keyboard_sender_cpp_node src/keyboard_sender.cpp)
-ament_target_dependencies(keyboard_sender_cpp_node rclcpp std_msgs)
+# Create executable for rbc25_ctrl
+add_executable(rbc25_ctrl src/rbc25_ctrl.cpp)
+ament_target_dependencies(rbc25_ctrl rclcpp odrive_custom_msg)
 
-#Subsciber
-add_executable(odrive_sender_cpp_node src/odrive_sender.cpp)
-ament_target_dependencies(odrive_sender_cpp_node rclcpp std_msgs)
+# Create executable for can_sender
+add_executable(can_sender src/can_sender.cpp)
+ament_target_dependencies(can_sender rclcpp odrive_custom_msg)
 
 install(TARGETS
   #don't forget to change the node's name here
-  keyboard_sender_cpp_node
-  odrive_sender_cpp_node
+  rbc25_ctrl
+  can_sender
   DESTINATION lib/${PROJECT_NAME})
 ############################################################
 
