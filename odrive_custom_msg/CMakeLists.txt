@@ -9,6 +9,7 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(odrive_custom_msg REQUIRED)
 
 ############################################################
 # Create executable for rbc25_ctrl
