@@ -1,0 +1,13 @@
+[0.006s] Invoking command in '/home/nvhoang/ros2_ws/src/odrive/Odrive_CAN_Custom_Msg/build/odrive_custom_msg': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/nvhoang/ros2_ws/src/odrive/Odrive_CAN_Custom_Msg/odrive_custom_msg -DCMAKE_INSTALL_PREFIX=/home/nvhoang/ros2_ws/src/odrive/Odrive_CAN_Custom_Msg/install/odrive_custom_msg
+[0.013s] -- Found ament_cmake: 1.3.11 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.083s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.087s] [31mCMake Error at /opt/ros/humble/share/ament_cmake_target_dependencies/cmake/ament_target_dependencies.cmake:77 (message):
+[0.087s]   ament_target_dependencies() the passed package name 'rclcpp' was not found
+[0.087s]   before
+[0.087s] Call Stack (most recent call first):
+[0.087s]   CMakeLists.txt:15 (ament_target_dependencies)
+[0.087s] 
+[0.087s] [0m
+[0.087s] -- Configuring incomplete, errors occurred!
+[0.088s] See also "/home/nvhoang/ros2_ws/src/odrive/Odrive_CAN_Custom_Msg/build/odrive_custom_msg/CMakeFiles/CMakeOutput.log".
+[0.090s] Invoked command in '/home/nvhoang/ros2_ws/src/odrive/Odrive_CAN_Custom_Msg/build/odrive_custom_msg' returned '1': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/nvhoang/ros2_ws/src/odrive/Odrive_CAN_Custom_Msg/odrive_custom_msg -DCMAKE_INSTALL_PREFIX=/home/nvhoang/ros2_ws/src/odrive/Odrive_CAN_Custom_Msg/install/odrive_custom_msg
