@@ -7,9 +7,21 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(odrive_custom_msg REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
+
+add_executable(rbc25_ctrl src/rbc25_ctrl.cpp) 
+ament_target_dependencies(rbc25_ctrl rclcpp std_msgs ${dependencies})
+
+add_executable(can_sender src/CAN_sender.cpp) 
+ament_target_dependencies(can_sender rclcpp std_msgs ${dependencies})
+
+add_executable(test_node src/test_node.cpp) 
+ament_target_dependencies(test_node rclcpp std_msgs ${dependencies})
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
