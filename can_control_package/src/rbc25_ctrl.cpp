@@ -1,6 +1,6 @@
 #include <rclcpp/rclcpp.hpp>
-#include "odrive_custom_msg/robocon_msg/Control.hpp"
-#include "odrive_custom_msg/robocon_msg/CAN_msg.hpp"
+#include "odrive_custom_msg/msg/control.hpp"
+#include "odrive_custom_msg/msg/ca_nmsg.hpp"
 #include <iomanip>
 #include <sstream>
 
@@ -8,19 +8,19 @@ class RBC25CtrlNode : public rclcpp::Node {
 public:
     RBC25CtrlNode() : Node("rbc25_ctrl") {
         // Subscriber to Control message
-        control_sub_ = this->create_subscription<odrive_custom_msg::robocon_msg::Control>(
+        control_sub_ = this->create_subscription<odrive_custom_msg::msg::Control>(
             "control_topic",
             10,
             std::bind(&RBC25CtrlNode::controlCallback, this, std::placeholders::_1));
 
-        // Publisher for CAN_msg
-        can_pub_ = this->create_publisher<odrive_custom_msg::robocon_msg::CAN_msg>("can_topic", 10);
+        // Publisher for CANmsg
+        can_pub_ = this->create_publisher<odrive_custom_msg::msg::CANmsg>("can_topic", 10);
 
         RCLCPP_INFO(this->get_logger(), "RBC25 Control Node has been started.");
     }
 
 private:
-    void controlCallback(const odrive_custom_msg::robocon_msg::Control::SharedPtr msg) {
+    void controlCallback(const odrive_custom_msg::msg::Control::SharedPtr msg) {
         uint8_t device_id = msg->device_id;
         float value;
         uint8_t cmd_id;
@@ -47,10 +47,10 @@ private:
         uint8_t data[8] = {0};
         std::memcpy(data, &value, sizeof(value));
 
-        // Create CAN_msg
-        odrive_custom_msg::robocon_msg::CAN_msg can_msg;
+        // Create CANmsg
+        odrive_custom_msg::msg::CANmsg can_msg;
         can_msg.frame_id = frame_id;
-        can_msg.data = std::vector<uint8_t>(data, data + 8);
+        std::copy(data, data + 8, can_msg.data.begin());
         can_msg.interface = "can0";
 
         // Publish CAN_msg
@@ -69,8 +69,8 @@ private:
         return oss.str();
     }
 
-    rclcpp::Subscription<odrive_custom_msg::robocon_msg::Control>::SharedPtr control_sub_;
-    rclcpp::Publisher<odrive_custom_msg::robocon_msg::CAN_msg>::SharedPtr can_pub_;
+    rclcpp::Subscription<odrive_custom_msg::msg::Control>::SharedPtr control_sub_;
+    rclcpp::Publisher<odrive_custom_msg::msg::CANmsg>::SharedPtr can_pub_;
 };
 
 int main(int argc, char **argv) {

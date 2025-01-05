@@ -7,25 +7,14 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
-find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
-find_package(odrive_custom_msg REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
 
-############################################################
-# Create executable for rbc25_ctrl
-add_executable(rbc25_ctrl src/rbc25_ctrl.cpp)
-ament_target_dependencies(rbc25_ctrl rclcpp odrive_custom_msg)
-
-# Create executable for can_sender
-add_executable(can_sender src/can_sender.cpp)
-ament_target_dependencies(can_sender rclcpp odrive_custom_msg)
-
-install(TARGETS
-  #don't forget to change the node's name here
-  rbc25_ctrl
-  can_sender
-  DESTINATION lib/${PROJECT_NAME})
-############################################################
+rosidl_generate_interfaces(${PROJECT_NAME}
+  "msg/CANmsg.msg"
+  "msg/Control.msg"
+  DEPENDENCIES std_msgs
+)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
