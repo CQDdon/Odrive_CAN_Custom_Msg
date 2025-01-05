@@ -1,30 +1,60 @@
-#include "rclcpp/rclcpp.hpp"
-#include "Odrive_Controller/msg/control_data.hpp"
+#include <rclcpp/rclcpp.hpp>
+#include "odrive_custom_msg/robocon_msg/Control.hpp"
+#include <chrono>
+#include <thread>
+#include <string>
+#include <iostream>
 
-class TestPublisher : public rclcpp::Node {
+using namespace std::chrono_literals;
+
+class TestNode : public rclcpp::Node {
 public:
-    TestPublisher() : Node("test_publisher") {
-        publishers_[0] = this->create_publisher<Odrive_Controller::msg::ControlData>("control_data_0", 10);
-        publishers_[1] = this->create_publisher<Odrive_Controller::msg::ControlData>("control_data_1", 10);
-        publishers_[2] = this->create_publisher<Odrive_Controller::msg::ControlData>("control_data_2", 10);
-        
+    TestNode() : Node("test_node") {
+        // Publisher to control_topic
+        publisher_ = this->create_publisher<odrive_custom_msg::robocon_msg::Control>("control_topic", 10);
+
+        // Timer to prompt user input periodically
         timer_ = this->create_wall_timer(
-            std::chrono::seconds(1),
-            std::bind(&TestPublisher::publishTestMessages, this)
-        );
+            1000ms, std::bind(&TestNode::promptUserInput, this));
+
+        RCLCPP_INFO(this->get_logger(), "Test Node started. Enter input as 'device_id value1 value2 value3'");
     }
 
 private:
-    void publishTestMessages() {
-        for (int i = 0; i < 3; ++i) {
-            auto msg = Odrive_Controller::msg::ControlData();
-            msg.input_pos = 1.0f * (i + 1);
-            msg.input_vel = 2.0f * (i + 1);
-            msg.input_torque = 3.0f * (i + 1);
-            publishers_[i]->publish(msg);
-        }
-    }
-
-    std::array<rclcpp::Publisher<Odrive_Controller::msg::ControlData>::SharedPtr, 3> publishers_;
+    rclcpp::Publisher<odrive_custom_msg::robocon_msg::Control>::SharedPtr publisher_;
     rclcpp::TimerBase::SharedPtr timer_;
+
+    void promptUserInput() {
+        std::string input;
+        std::cout << "Enter data (device_id input_pos input_vel input_torque): ";
+        std::getline(std::cin, input);
+
+        std::istringstream iss(input);
+        uint8_t device_id;
+        float input_pos, input_vel, input_torque;
+
+        if (!(iss >> device_id >> input_pos >> input_vel >> input_torque)) {
+            RCLCPP_ERROR(this->get_logger(), "Invalid input. Please enter: device_id input_pos input_vel input_torque");
+            return;
+        }
+
+        // Create and publish Control message
+        auto msg = odrive_custom_msg::robocon_msg::Control();
+        msg.device_id = device_id;
+        msg.input_pos = input_pos;
+        msg.input_vel = input_vel;
+        msg.input_torque = input_torque;
+
+        publisher_->publish(msg);
+
+        RCLCPP_INFO(this->get_logger(), "Published: device_id=%u, input_pos=%.2f, input_vel=%.2f, input_torque=%.2f",
+                    device_id, input_pos, input_vel, input_torque);
+    }
 };
+
+int main(int argc, char **argv) {
+    rclcpp::init(argc, argv);
+    rclcpp::spin(std::make_shared<TestNode>());
+    rclcpp::shutdown();
+    return 0;
+}

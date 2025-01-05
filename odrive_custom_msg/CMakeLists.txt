@@ -20,6 +20,10 @@ ament_target_dependencies(rbc25_ctrl rclcpp odrive_custom_msg)
 add_executable(can_sender src/can_sender.cpp)
 ament_target_dependencies(can_sender rclcpp odrive_custom_msg)
 
+# Create executable for test_node
+add_executable(test_node src/test_node.cpp)
+ament_target_dependencies(test_node rclcpp odrive_custom_msg)
+
 install(TARGETS
   #don't forget to change the node's name here
   rbc25_ctrl
