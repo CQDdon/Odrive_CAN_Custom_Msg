@@ -1,5 +1,6 @@
 #include <rclcpp/rclcpp.hpp>
-#include "odrive_custom_msg/robocon_msg/CAN_msg.hpp"
+#include "odrive_custom_msg/msg/control.hpp"
+#include "odrive_custom_msg/msg/ca_nmsg.hpp"
 #include <linux/can.h>
 #include <linux/can/raw.h>
 #include <net/if.h>
@@ -16,8 +17,8 @@ public:
         // Initialize socket to -1
         can_socket_ = -1;
 
-        // Subscription to CAN_msg topic
-        subscriber_ = this->create_subscription<odrive_custom_msg::robocon_msg::CAN_msg>(
+        // Subscription to CANmsg topic
+        subscriber_ = this->create_subscription<odrive_custom_msg::msg::CANmsg>(
             "can_topic",
             10,
             std::bind(&CANSenderNode::canMessageCallback, this, std::placeholders::_1));
@@ -33,7 +34,7 @@ public:
 
 private:
     int can_socket_;
-    rclcpp::Subscription<odrive_custom_msg::robocon_msg::CAN_msg>::SharedPtr subscriber_;
+    rclcpp::Subscription<odrive_custom_msg::msg::CANmsg>::SharedPtr subscriber_;
 
     void setupSocket(const std::string &interface) {
         if (can_socket_ >= 0) {
@@ -65,7 +66,7 @@ private:
         RCLCPP_INFO(this->get_logger(), "Socket bound to interface: %s", interface.c_str());
     }
 
-    void canMessageCallback(const odrive_custom_msg::robocon_msg::CAN_msg::SharedPtr msg) {
+    void canMessageCallback(const odrive_custom_msg::msg::CANmsg::SharedPtr msg) {
         // Setup socket for the specified interface
         setupSocket(msg->interface);
 

@@ -1,5 +1,6 @@
 #include <rclcpp/rclcpp.hpp>
-#include "odrive_custom_msg/robocon_msg/Control.hpp"
+#include "odrive_custom_msg/msg/control.hpp"
+#include "odrive_custom_msg/msg/ca_nmsg.hpp"
 #include <chrono>
 #include <thread>
 #include <string>
@@ -11,7 +12,7 @@ class TestNode : public rclcpp::Node {
 public:
     TestNode() : Node("test_node") {
         // Publisher to control_topic
-        publisher_ = this->create_publisher<odrive_custom_msg::robocon_msg::Control>("control_topic", 10);
+        publisher_ = this->create_publisher<odrive_custom_msg::msg::Control>("control_topic", 10);
 
         // Timer to prompt user input periodically
         timer_ = this->create_wall_timer(
@@ -21,7 +22,7 @@ public:
     }
 
 private:
-    rclcpp::Publisher<odrive_custom_msg::robocon_msg::Control>::SharedPtr publisher_;
+    rclcpp::Publisher<odrive_custom_msg::msg::Control>::SharedPtr publisher_;
     rclcpp::TimerBase::SharedPtr timer_;
 
     void promptUserInput() {
@@ -39,8 +40,8 @@ private:
         }
 
         // Create and publish Control message
-        auto msg = odrive_custom_msg::robocon_msg::Control();
-        msg.device_id = device_id;
+        auto msg = odrive_custom_msg::msg::Control();
+        msg.device_id = device_id - 48;
         msg.input_pos = input_pos;
         msg.input_vel = input_vel;
         msg.input_torque = input_torque;
@@ -48,7 +49,7 @@ private:
         publisher_->publish(msg);
 
         RCLCPP_INFO(this->get_logger(), "Published: device_id=%u, input_pos=%.2f, input_vel=%.2f, input_torque=%.2f",
-                    device_id, input_pos, input_vel, input_torque);
+                    (device_id - 48), input_pos, input_vel, input_torque);
     }
 };
 
