@@ -23,10 +23,14 @@ ament_target_dependencies(can_sender rclcpp odrive_custom_msg)
 add_executable(test_node src/test_node.cpp)
 ament_target_dependencies(test_node rclcpp odrive_custom_msg)
 
+add_executable(calibration_publisher src/calib.cpp)
+ament_target_dependencies(calibration_publisher rclcpp std_msgs)
+
 include_directories(include)
 
 install(TARGETS
   #don't forget to change the node's name here
+  calibration_publisher
   rbc25_ctrl
   can_sender
   test_node

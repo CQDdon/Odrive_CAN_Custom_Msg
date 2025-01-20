@@ -1,6 +1,7 @@
 #include <rclcpp/rclcpp.hpp>
 #include "odrive_custom_msg/msg/control.hpp"
 #include "odrive_custom_msg/msg/ca_nmsg.hpp"
+#include <std_msgs/msg/u_int8.hpp>
 #include <iomanip>
 #include <sstream>
 
@@ -12,6 +13,12 @@ public:
             "control_topic",
             10,
             std::bind(&RBC25CtrlNode::controlCallback, this, std::placeholders::_1));
+
+        // Subscriber for Full Calibration Sequence command
+        calib_sub_ = this->create_subscription<std_msgs::msg::UInt8>(
+            "calibration_topic",
+            10,
+            std::bind(&RBC25CtrlNode::calibrationCallback, this, std::placeholders::_1));
 
         // Publisher for CANmsg
         can_pub_ = this->create_publisher<odrive_custom_msg::msg::CANmsg>("can_topic", 10);
@@ -51,13 +58,35 @@ private:
         odrive_custom_msg::msg::CANmsg can_msg;
         can_msg.frame_id = frame_id;
         std::copy(data, data + 8, can_msg.data.begin());
-        can_msg.interface = "can0";
+        can_msg.interface = "vcan0";
 
         // Publish CAN_msg
         can_pub_->publish(can_msg);
 
         RCLCPP_INFO(this->get_logger(), "Published CAN frame_id: 0x%X, data: [%s], interface: %s", 
                     frame_id, formatData(data).c_str(), can_msg.interface.c_str());
+    }
+
+    void calibrationCallback(const std_msgs::msg::UInt8::SharedPtr msg) {
+        uint8_t device_id = msg->data;
+
+        // Command ID for Full Calibration Sequence
+        uint8_t cmd_id = 0x03;
+
+        // Create frame_id
+        uint32_t frame_id = (device_id << 5) | cmd_id;
+
+        // Create CANmsg
+        odrive_custom_msg::msg::CANmsg can_msg;
+        can_msg.frame_id = frame_id;
+        can_msg.data.fill(0);  // Fill the data array with zeros
+        can_msg.interface = "vcan0";
+
+        // Publish CAN_msg
+        can_pub_->publish(can_msg);
+
+        RCLCPP_INFO(this->get_logger(), "Published Full Calibration Command for device_id: %u, frame_id: 0x%X", 
+                    device_id, frame_id);
     }
 
     std::string formatData(uint8_t *data) {
@@ -70,6 +99,7 @@ private:
     }
 
     rclcpp::Subscription<odrive_custom_msg::msg::Control>::SharedPtr control_sub_;
+    rclcpp::Subscription<std_msgs::msg::UInt8>::SharedPtr calib_sub_;
     rclcpp::Publisher<odrive_custom_msg::msg::CANmsg>::SharedPtr can_pub_;
 };
 
