@@ -27,29 +27,67 @@ private:
 
     void promptUserInput() {
         std::string input;
-        std::cout << "Enter data (device_id input_pos input_vel input_torque): ";
+        std::cout << "Input (motor control: \"device_id input_pos input_vel input_torque\", special command: \"s device_id special_cmd\"): ";
         std::getline(std::cin, input);
-
         std::istringstream iss(input);
-        uint8_t device_id;
-        float input_pos, input_vel, input_torque;
-
-        if (!(iss >> device_id >> input_pos >> input_vel >> input_torque)) {
-            RCLCPP_ERROR(this->get_logger(), "Invalid input. Please enter: device_id input_pos input_vel input_torque");
-            return;
+        std::string token;
+        iss >> token;
+    
+        // Nếu lệnh đặc biệt
+        if (token == "s") {
+            std::string devStr, cmdStr;
+            iss >> devStr >> cmdStr;
+            int8_t device_id;
+            // Nếu nhập dấu ".", set device_id = 0xFF (để chọn tất cả)
+            if (devStr == ".") {
+                device_id = 0xFF;
+            } else {
+                // Chuyển đổi sang số và gửi dưới dạng số âm để đánh dấu lệnh đặc biệt
+                device_id = -std::stoi(devStr);
+            }
+            // Mapping special command
+            uint8_t special_cmd = 0xFF; // khởi tạo giá trị không hợp lệ
+            if (cmdStr == "calib") {
+                special_cmd = 0x00;
+            } else if (cmdStr == "stop") {
+                special_cmd = 0x01;
+            } else if (cmdStr == "idle") {
+                special_cmd = 0x02;
+            } else if (cmdStr == "clrerr") {
+                special_cmd = 0x03;
+            } else if (cmdStr == "clc") {
+                special_cmd = 0x04;
+            } else {
+                RCLCPP_ERROR(this->get_logger(), "Invalid special command.");
+                return;
+            }
+            // Tạo thông điệp Control với lệnh đặc biệt: sử dụng input_pos để chứa mã lệnh
+            auto msg = odrive_custom_msg::msg::Control();
+            msg.device_id = device_id;  
+            msg.input_pos = static_cast<float>(special_cmd);
+            msg.input_vel = 0.0f;
+            msg.input_torque = 0.0f;
+            publisher_->publish(msg);
+            RCLCPP_INFO(this->get_logger(), "Special command sended: device_id=%d, special_cmd=%s", device_id, cmdStr.c_str());
         }
-
-        // Create and publish Control message
-        auto msg = odrive_custom_msg::msg::Control();
-        msg.device_id = device_id - 48;
-        msg.input_pos = input_pos;
-        msg.input_vel = input_vel;
-        msg.input_torque = input_torque;
-
-        publisher_->publish(msg);
-
-        RCLCPP_INFO(this->get_logger(), "Published: device_id=%u, input_pos=%.2f, input_vel=%.2f, input_torque=%.2f",
-                    (device_id - 48), input_pos, input_vel, input_torque);
+        else {
+            // Xử lý lệnh bình thường như cũ
+            uint8_t device_id;
+            float input_pos, input_vel, input_torque;
+            // token đã đọc là device_id dạng string, cần chuyển đổi
+            device_id = static_cast<uint8_t>(std::stoi(token));
+            if (!(iss >> input_pos >> input_vel >> input_torque)) {
+                RCLCPP_ERROR(this->get_logger(), "Invalid data. Motor control: \"device_id input_pos input_vel input_torque\"");
+                return;
+            }
+            auto msg = odrive_custom_msg::msg::Control();
+            msg.device_id = device_id;
+            msg.input_pos = input_pos;
+            msg.input_vel = input_vel;
+            msg.input_torque = input_torque;
+            publisher_->publish(msg);
+            RCLCPP_INFO(this->get_logger(), "Motor control sended device_id=%u, input_pos=%.2f, input_vel=%.2f, input_torque=%.2f", device_id, input_pos, input_vel, input_torque);
+        }
     }
 };
 
