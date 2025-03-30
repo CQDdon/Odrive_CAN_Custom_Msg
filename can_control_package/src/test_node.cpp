@@ -1,97 +1,130 @@
 #include <rclcpp/rclcpp.hpp>
 #include "odrive_custom_msg/msg/control.hpp"
-#include "odrive_custom_msg/msg/ca_nmsg.hpp"
 #include <chrono>
 #include <thread>
 #include <string>
 #include <iostream>
+#include <sstream>
+
+// Define enum for Control mode
+enum ControlMode : uint8_t
+{
+    SPECIAL = 0,
+    NORMAL = 1
+};
 
 using namespace std::chrono_literals;
 
-class TestNode : public rclcpp::Node {
+class TestNode : public rclcpp::Node
+{
 public:
-    TestNode() : Node("test_node") {
-        // Publisher to control_topic
+    TestNode() : Node("test_node")
+    {
         publisher_ = this->create_publisher<odrive_custom_msg::msg::Control>("control_topic", 10);
-
-        // Timer to prompt user input periodically
         timer_ = this->create_wall_timer(
             1000ms, std::bind(&TestNode::promptUserInput, this));
-
-        RCLCPP_INFO(this->get_logger(), "Test Node started. Enter input as 'device_id value1 value2 value3'");
+        RCLCPP_INFO(this->get_logger(),
+                    "Test Node started.\nEnter commands as follows:\n  - Normal command: <device_id> <input_pos> <input_vel> <input_torque>\n  - Special command: s <device_id> <special_cmd> (use '.' for device_id to broadcast)");
     }
 
 private:
     rclcpp::Publisher<odrive_custom_msg::msg::Control>::SharedPtr publisher_;
     rclcpp::TimerBase::SharedPtr timer_;
 
-    void promptUserInput() {
+    void promptUserInput()
+    {
         std::string input;
-        std::cout << "Input (motor control: \"device_id input_pos input_vel input_torque\", special command: \"s device_id special_cmd\"): ";
+        std::cout << "Enter command: ";
         std::getline(std::cin, input);
         std::istringstream iss(input);
         std::string token;
         iss >> token;
-    
-        // Nếu lệnh đặc biệt
-        if (token == "s") {
+
+        auto msg = odrive_custom_msg::msg::Control();
+
+        // Special command
+        if (token == "s")
+        {
+            msg.mode = SPECIAL; // Special command mode
             std::string devStr, cmdStr;
             iss >> devStr >> cmdStr;
-            int8_t device_id;
-            // Nếu nhập dấu ".", set device_id = 0xFF (để chọn tất cả)
-            if (devStr == ".") {
+            uint8_t device_id;
+            if (devStr == ".")
+            {
+                // Use 0xFF to indicate broadcast
                 device_id = 0xFF;
-            } else {
-                // Chuyển đổi sang số và gửi dưới dạng số âm để đánh dấu lệnh đặc biệt
-                device_id = -std::stoi(devStr);
             }
-            // Mapping special command
-            uint8_t special_cmd = 0xFF; // khởi tạo giá trị không hợp lệ
-            if (cmdStr == "calib") {
+            else
+            {
+                device_id = static_cast<uint8_t>(std::stoi(devStr));
+            }
+            msg.device_id = device_id;
+            // Map special command string to a numeric code
+            uint8_t special_cmd = 0xFF; // initial invalid value
+            if (cmdStr == "calib")
+            {
                 special_cmd = 0x00;
-            } else if (cmdStr == "stop") {
+            }
+            else if (cmdStr == "stop")
+            {
                 special_cmd = 0x01;
-            } else if (cmdStr == "idle") {
+            }
+            else if (cmdStr == "idle")
+            {
                 special_cmd = 0x02;
-            } else if (cmdStr == "clrerr") {
+            }
+            else if (cmdStr == "clrerr")
+            {
                 special_cmd = 0x03;
-            } else if (cmdStr == "clc") {
+            }
+            else if (cmdStr == "clc")
+            {
                 special_cmd = 0x04;
-            } else {
+            }
+            else
+            {
                 RCLCPP_ERROR(this->get_logger(), "Invalid special command.");
                 return;
             }
-            // Tạo thông điệp Control với lệnh đặc biệt: sử dụng input_pos để chứa mã lệnh
-            auto msg = odrive_custom_msg::msg::Control();
-            msg.device_id = device_id;  
             msg.input_pos = static_cast<float>(special_cmd);
             msg.input_vel = 0.0f;
             msg.input_torque = 0.0f;
             publisher_->publish(msg);
-            RCLCPP_INFO(this->get_logger(), "Special command sended: device_id=%d, special_cmd=%s", device_id, cmdStr.c_str());
+            RCLCPP_INFO(this->get_logger(), "Published special command: device_id=%u, command=%s",
+                        device_id, cmdStr.c_str());
         }
-        else {
-            // Xử lý lệnh bình thường như cũ
-            uint8_t device_id;
-            float input_pos, input_vel, input_torque;
-            // token đã đọc là device_id dạng string, cần chuyển đổi
-            device_id = static_cast<uint8_t>(std::stoi(token));
-            if (!(iss >> input_pos >> input_vel >> input_torque)) {
-                RCLCPP_ERROR(this->get_logger(), "Invalid data. Motor control: \"device_id input_pos input_vel input_torque\"");
+        else
+        {
+            // Normal command
+            msg.mode = NORMAL;
+            try
+            {
+                uint8_t device_id = static_cast<uint8_t>(std::stoi(token));
+                msg.device_id = device_id;
+            }
+            catch (...)
+            {
+                RCLCPP_ERROR(this->get_logger(), "Invalid device_id.");
                 return;
             }
-            auto msg = odrive_custom_msg::msg::Control();
-            msg.device_id = device_id;
+            float input_pos, input_vel, input_torque;
+            if (!(iss >> input_pos >> input_vel >> input_torque))
+            {
+                RCLCPP_ERROR(this->get_logger(), "Invalid input. Please enter: <device_id> <input_pos> <input_vel> <input_torque>");
+                return;
+            }
             msg.input_pos = input_pos;
             msg.input_vel = input_vel;
             msg.input_torque = input_torque;
             publisher_->publish(msg);
-            RCLCPP_INFO(this->get_logger(), "Motor control sended device_id=%u, input_pos=%.2f, input_vel=%.2f, input_torque=%.2f", device_id, input_pos, input_vel, input_torque);
+            RCLCPP_INFO(this->get_logger(), "Published normal command: device_id=%u, input_pos=%.2f, input_vel=%.2f, input_torque=%.2f",
+                        msg.device_id, input_pos, input_vel, input_torque);
         }
     }
 };
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
     rclcpp::init(argc, argv);
     rclcpp::spin(std::make_shared<TestNode>());
     rclcpp::shutdown();

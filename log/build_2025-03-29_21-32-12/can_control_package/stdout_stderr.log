@@ -1,0 +1,36 @@
+[35m[1mConsolidate compiler generated dependencies of target rbc25_ctrl[0m
+[ 33%] Built target can_sender
+[ 66%] Built target test_node
+[ 83%] [32mBuilding CXX object CMakeFiles/rbc25_ctrl.dir/src/rbc25_ctrl.cpp.o[0m
+[01m[K/home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/can_control_package/src/rbc25_ctrl.cpp:[m[K In member function ‘[01m[Kvoid RBC25CtrlNode::controlCallback(odrive_custom_msg::msg::Control_<std::allocator<void> >::SharedPtr)[m[K’:
+[01m[K/home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/can_control_package/src/rbc25_ctrl.cpp:26:24:[m[K [01;35m[Kwarning: [m[Kcomparison is always false due to limited range of data type [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wtype-limits-Wtype-limits]8;;[m[K]
+   26 |     if ([01;35m[Kmsg->device_id < 0[m[K || msg->device_id == 0xFF) {
+      |         [01;35m[K~~~~~~~~~~~~~~~^~~[m[K
+[01m[K/home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/can_control_package/src/rbc25_ctrl.cpp:98:46:[m[K [01;35m[Kwarning: [m[Kcomparison is always false due to limited range of data type [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wtype-limits-Wtype-limits]8;;[m[K]
+   98 | nt8_t dev_id = ([01;35m[Kmsg->device_id < 0[m[K) ? static_cast<uint8_t>(-msg->device_id) : msg->device_id;
+      |                 [01;35m[K~~~~~~~~~~~~~~~^~~[m[K
+
+[100%] [32m[1mLinking CXX executable rbc25_ctrl[0m
+[100%] Built target rbc25_ctrl
+-- Install configuration: ""
+-- Installing: /home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/install/can_control_package/lib/can_control_package/rbc25_ctrl
+-- Set runtime path of "/home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/install/can_control_package/lib/can_control_package/rbc25_ctrl" to ""
+-- Installing: /home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/install/can_control_package/lib/can_control_package/can_sender
+-- Set runtime path of "/home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/install/can_control_package/lib/can_control_package/can_sender" to ""
+-- Installing: /home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/install/can_control_package/lib/can_control_package/test_node
+-- Set runtime path of "/home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/install/can_control_package/lib/can_control_package/test_node" to ""
+-- Installing: /home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/install/can_control_package/share/ament_index/resource_index/package_run_dependencies/can_control_package
+-- Installing: /home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/install/can_control_package/share/ament_index/resource_index/parent_prefix_path/can_control_package
+-- Installing: /home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/install/can_control_package/share/can_control_package/environment/ament_prefix_path.sh
+-- Installing: /home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/install/can_control_package/share/can_control_package/environment/ament_prefix_path.dsv
+-- Installing: /home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/install/can_control_package/share/can_control_package/environment/path.sh
+-- Installing: /home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/install/can_control_package/share/can_control_package/environment/path.dsv
+-- Installing: /home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/install/can_control_package/share/can_control_package/local_setup.bash
+-- Installing: /home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/install/can_control_package/share/can_control_package/local_setup.sh
+-- Installing: /home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/install/can_control_package/share/can_control_package/local_setup.zsh
+-- Installing: /home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/install/can_control_package/share/can_control_package/local_setup.dsv
+-- Installing: /home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/install/can_control_package/share/can_control_package/package.dsv
+-- Installing: /home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/install/can_control_package/share/ament_index/resource_index/packages/can_control_package
+-- Installing: /home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/install/can_control_package/share/can_control_package/cmake/can_control_packageConfig.cmake
+-- Installing: /home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/install/can_control_package/share/can_control_package/cmake/can_control_packageConfig-version.cmake
+-- Installing: /home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/install/can_control_package/share/can_control_package/package.xml

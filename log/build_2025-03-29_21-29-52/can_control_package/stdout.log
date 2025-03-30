@@ -1,0 +1,6 @@
+[35m[1mConsolidate compiler generated dependencies of target rbc25_ctrl[0m
+[35m[1mConsolidate compiler generated dependencies of target test_node[0m
+[35m[1mConsolidate compiler generated dependencies of target can_sender[0m
+[ 33%] Built target test_node
+[ 50%] [32mBuilding CXX object CMakeFiles/rbc25_ctrl.dir/src/rbc25_ctrl.cpp.o[0m
+[ 83%] Built target can_sender

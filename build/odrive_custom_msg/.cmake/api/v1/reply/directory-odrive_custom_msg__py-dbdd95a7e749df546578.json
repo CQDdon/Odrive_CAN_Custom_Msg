@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "odrive_custom_msg__py",
+		"source" : "/home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/build/odrive_custom_msg/odrive_custom_msg__py"
+	}
+}

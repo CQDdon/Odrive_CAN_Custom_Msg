@@ -1,0 +1,12 @@
+[01m[K/home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/can_control_package/src/test_node.cpp:[m[K In member function ‘[01m[Kvoid TestNode::promptUserInput()[m[K’:
+[01m[K/home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/can_control_package/src/test_node.cpp:43:29:[m[K [01;35m[Kwarning: [m[Koverflow in conversion from ‘[01m[Kint[m[K’ to ‘[01m[Kint8_t[m[K’ {aka ‘[01m[Ksigned char[m[K’} changes value from ‘[01m[K255[m[K’ to ‘[01m[K-1[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Woverflow-Woverflow]8;;[m[K]
+   43 |                 device_id = [01;35m[K0xFF[m[K;
+      |                             [01;35m[K^~~~[m[K
+[01m[K/home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/can_control_package/src/rbc25_ctrl.cpp:[m[K In member function ‘[01m[Kvoid RBC25CtrlNode::controlCallback(odrive_custom_msg::msg::Control_<std::allocator<void> >::SharedPtr)[m[K’:
+[01m[K/home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/can_control_package/src/rbc25_ctrl.cpp:26:46:[m[K [01;35m[Kwarning: [m[Kcomparison is always false due to limited range of data type [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wtype-limits-Wtype-limits]8;;[m[K]
+   26 | device_id < 0 || [01;35m[Kmsg->device_id == 0xFF[m[K) {
+      |                  [01;35m[K~~~~~~~~~~~~~~~^~~~~~~[m[K
+
+[01m[K/home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/can_control_package/src/rbc25_ctrl.cpp:81:28:[m[K [01;35m[Kwarning: [m[Kcomparison is always false due to limited range of data type [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wtype-limits-Wtype-limits]8;;[m[K]
+   81 |         if ([01;35m[Kmsg->device_id == 0xFF[m[K) {
+      |             [01;35m[K~~~~~~~~~~~~~~~^~~~~~~[m[K

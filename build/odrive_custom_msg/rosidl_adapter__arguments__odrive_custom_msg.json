@@ -1,0 +1,7 @@
+{
+  "package_name": "odrive_custom_msg",
+  "non_idl_tuples": [
+    "/home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/odrive_custom_msg:msg/CANmsg.msg",
+    "/home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/odrive_custom_msg:msg/Control.msg"
+  ]
+}

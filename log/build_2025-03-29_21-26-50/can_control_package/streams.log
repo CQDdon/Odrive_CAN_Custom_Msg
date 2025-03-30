@@ -1,0 +1,58 @@
+[0.020s] Invoking command in '/home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/build/can_control_package': AMENT_PREFIX_PATH=/home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/install/odrive_custom_msg:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/install/odrive_custom_msg:/home/ddon/ros2_ws_cpp/install/can_control_package:/home/ddon/ros2_ws_cpp/install/odrive_custom_msg:/home/ddon/ros2_ws_cpp/install/odrive_can_cpp:/home/ddon/ros2_ws_cpp/install/cpp_pubsub:/home/ddon/ros2_ws/install/odrive_can:/home/ddon/ros2_ws/install/my_robot_controller:/home/ddon/ros2_ws/install/keyboard_listener:/opt/ros/humble CONDA_PROMPT_MODIFIER=(base) LD_LIBRARY_PATH=/home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/install/odrive_custom_msg/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/install/odrive_custom_msg/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/cmake /home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/can_control_package -DCMAKE_INSTALL_PREFIX=/home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/install/can_control_package
+[0.122s] -- The C compiler identification is GNU 11.4.0
+[0.193s] -- The CXX compiler identification is GNU 11.4.0
+[0.204s] -- Detecting C compiler ABI info
+[0.279s] -- Detecting C compiler ABI info - done
+[0.288s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.288s] -- Detecting C compile features
+[0.289s] -- Detecting C compile features - done
+[0.293s] -- Detecting CXX compiler ABI info
+[0.392s] -- Detecting CXX compiler ABI info - done
+[0.412s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.412s] -- Detecting CXX compile features
+[0.412s] -- Detecting CXX compile features - done
+[0.416s] -- Found ament_cmake: 1.3.11 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.999s] -- Found Python3: /home/ddon/miniconda3/bin/python3 (found version "3.12.2") found components: Interpreter 
+[1.150s] -- Found rclcpp: 16.0.11 (/opt/ros/humble/share/rclcpp/cmake)
+[1.203s] -- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[1.209s] -- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[1.219s] -- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[1.233s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.270s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.359s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[1.364s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[1.496s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[1.526s] -- Found FastRTPS: /opt/ros/humble/include  
+[1.568s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[1.583s] -- Looking for pthread.h
+[1.661s] -- Looking for pthread.h - found
+[1.661s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[1.737s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[1.738s] -- Found Threads: TRUE  
+[1.808s] -- Found odrive_custom_msg: 0.0.0 (/home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/install/odrive_custom_msg/share/odrive_custom_msg/cmake)
+[1.827s] -- Found ament_lint_auto: 0.12.11 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[1.944s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[1.945s] -- Configured cppcheck include dirs: /home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/can_control_package/include
+[1.945s] -- Configured cppcheck exclude dirs and/or files: 
+[1.945s] -- Added test 'flake8' to check Python code syntax and style conventions
+[1.946s] -- Added test 'lint_cmake' to check CMake code style
+[1.947s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[1.947s] -- Added test 'uncrustify' to check C / C++ code style
+[1.948s] -- Configured uncrustify additional arguments: 
+[1.948s] -- Added test 'xmllint' to check XML markup files
+[1.950s] -- Configuring done
+[1.953s] [31mCMake Error at CMakeLists.txt:26 (add_executable):
+[1.953s]   Cannot find source file:
+[1.953s] 
+[1.953s]     src/calib.cpp
+[1.953s] 
+[1.953s]   Tried extensions .c .C .c++ .cc .cpp .cxx .cu .mpp .m .M .mm .ixx .cppm .h
+[1.953s]   .hh .h++ .hm .hpp .hxx .in .txx .f .F .for .f77 .f90 .f95 .f03 .hip .ispc
+[1.953s] 
+[1.953s] [0m
+[1.953s] [31mCMake Error at CMakeLists.txt:26 (add_executable):
+[1.953s]   No SOURCES given to target: calibration_publisher
+[1.954s] 
+[1.954s] [0m
+[1.954s] [0mCMake Generate step failed.  Build files cannot be regenerated correctly.[0m
+[1.962s] Invoked command in '/home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/build/can_control_package' returned '1': AMENT_PREFIX_PATH=/home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/install/odrive_custom_msg:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/install/odrive_custom_msg:/home/ddon/ros2_ws_cpp/install/can_control_package:/home/ddon/ros2_ws_cpp/install/odrive_custom_msg:/home/ddon/ros2_ws_cpp/install/odrive_can_cpp:/home/ddon/ros2_ws_cpp/install/cpp_pubsub:/home/ddon/ros2_ws/install/odrive_can:/home/ddon/ros2_ws/install/my_robot_controller:/home/ddon/ros2_ws/install/keyboard_listener:/opt/ros/humble CONDA_PROMPT_MODIFIER=(base) LD_LIBRARY_PATH=/home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/install/odrive_custom_msg/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/install/odrive_custom_msg/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/cmake /home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/can_control_package -DCMAKE_INSTALL_PREFIX=/home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/install/can_control_package

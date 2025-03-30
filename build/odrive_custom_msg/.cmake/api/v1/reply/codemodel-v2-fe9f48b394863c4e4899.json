@@ -1,0 +1,233 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-f4b0d079bede0b10175d.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17
+					]
+				},
+				{
+					"build" : "odrive_custom_msg__py",
+					"jsonFile" : "directory-odrive_custom_msg__py-dbdd95a7e749df546578.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "/home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/build/odrive_custom_msg/odrive_custom_msg__py",
+					"targetIndexes" : 
+					[
+						4
+					]
+				}
+			],
+			"name" : "",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1
+					],
+					"name" : "odrive_custom_msg",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ament_cmake_python_build_odrive_custom_msg_egg::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ament_cmake_python_build_odrive_custom_msg_egg-5a173cdda9608de95319.json",
+					"name" : "ament_cmake_python_build_odrive_custom_msg_egg",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ament_cmake_python_copy_odrive_custom_msg::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ament_cmake_python_copy_odrive_custom_msg-99724ff431a48e879130.json",
+					"name" : "ament_cmake_python_copy_odrive_custom_msg",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "odrive_custom_msg::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-odrive_custom_msg-222d23c2b3c50afa3293.json",
+					"name" : "odrive_custom_msg",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "odrive_custom_msg__cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-odrive_custom_msg__cpp-a0e9a25769a4c862652e.json",
+					"name" : "odrive_custom_msg__cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "odrive_custom_msg__py::@6d2ec99bfc5c587ff3d8",
+					"jsonFile" : "target-odrive_custom_msg__py-33bde0eb02bc759fb6d4.json",
+					"name" : "odrive_custom_msg__py",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "odrive_custom_msg__rosidl_generator_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-odrive_custom_msg__rosidl_generator_c-63e37b2b3941d6ed0157.json",
+					"name" : "odrive_custom_msg__rosidl_generator_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "odrive_custom_msg__rosidl_generator_py::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-odrive_custom_msg__rosidl_generator_py-0dadcac711dee150170a.json",
+					"name" : "odrive_custom_msg__rosidl_generator_py",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "odrive_custom_msg__rosidl_typesupport_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-odrive_custom_msg__rosidl_typesupport_c-418421a8409baeb9c278.json",
+					"name" : "odrive_custom_msg__rosidl_typesupport_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "odrive_custom_msg__rosidl_typesupport_c__pyext::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-odrive_custom_msg__rosidl_typesupport_c__pyext-92b966d5409d3436ecd4.json",
+					"name" : "odrive_custom_msg__rosidl_typesupport_c__pyext",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "odrive_custom_msg__rosidl_typesupport_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-odrive_custom_msg__rosidl_typesupport_cpp-52e3c8f0231dfdb72038.json",
+					"name" : "odrive_custom_msg__rosidl_typesupport_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "odrive_custom_msg__rosidl_typesupport_fastrtps_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-odrive_custom_msg__rosidl_typesupport_fastrtps_c-c5327ab067e66928d7c1.json",
+					"name" : "odrive_custom_msg__rosidl_typesupport_fastrtps_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "odrive_custom_msg__rosidl_typesupport_fastrtps_c__pyext::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-odrive_custom_msg__rosidl_typesupport_fastrtps_c__pyext-4fe71b649c3ae6c198a5.json",
+					"name" : "odrive_custom_msg__rosidl_typesupport_fastrtps_c__pyext",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "odrive_custom_msg__rosidl_typesupport_fastrtps_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-odrive_custom_msg__rosidl_typesupport_fastrtps_cpp-53991be87c41bf907a09.json",
+					"name" : "odrive_custom_msg__rosidl_typesupport_fastrtps_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "odrive_custom_msg__rosidl_typesupport_introspection_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-odrive_custom_msg__rosidl_typesupport_introspection_c-70fbf7281d1675546016.json",
+					"name" : "odrive_custom_msg__rosidl_typesupport_introspection_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "odrive_custom_msg__rosidl_typesupport_introspection_c__pyext::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-odrive_custom_msg__rosidl_typesupport_introspection_c__pyext-ca131e4926908bbc1463.json",
+					"name" : "odrive_custom_msg__rosidl_typesupport_introspection_c__pyext",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "odrive_custom_msg__rosidl_typesupport_introspection_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-odrive_custom_msg__rosidl_typesupport_introspection_cpp-825d11b62595153fd3ba.json",
+					"name" : "odrive_custom_msg__rosidl_typesupport_introspection_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "odrive_custom_msg_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-odrive_custom_msg_uninstall-467ad067f8c2f9531570.json",
+					"name" : "odrive_custom_msg_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-4fd640952cc7e7b666c7.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/build/odrive_custom_msg",
+		"source" : "/home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/odrive_custom_msg"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}
