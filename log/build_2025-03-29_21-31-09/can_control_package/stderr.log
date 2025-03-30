@@ -1,0 +1,12 @@
+[01m[K/home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/can_control_package/src/rbc25_ctrl.cpp:24:1:[m[K [01;31m[Kerror: [m[K‘[01m[Kvvoid[m[K’ does not name a type; did you mean ‘[01m[Kvoid[m[K’?
+   24 | [01;31m[Kvvoid[m[K controlCallback(const odrive_custom_msg::msg::Control::SharedPtr msg) {
+      | [01;31m[K^~~~~[m[K
+      | [32m[Kvoid[m[K
+[01m[K/home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/can_control_package/src/rbc25_ctrl.cpp:[m[K In constructor ‘[01m[KRBC25CtrlNode::RBC25CtrlNode()[m[K’:
+[01m[K/home/ddon/ros2_ws_cpp/src/robocon2024/Odrive_CAN_Custom_Msg/can_control_package/src/rbc25_ctrl.cpp:15:39:[m[K [01;31m[Kerror: [m[K‘[01m[KcontrolCallback[m[K’ is not a member of ‘[01m[KRBC25CtrlNode[m[K’
+   15 |      std::bind(&RBC25CtrlNode::[01;31m[KcontrolCallback[m[K, this, std::placeholders::_1));
+      |                                [01;31m[K^~~~~~~~~~~~~~~[m[K
+
+gmake[2]: *** [CMakeFiles/rbc25_ctrl.dir/build.make:76: CMakeFiles/rbc25_ctrl.dir/src/rbc25_ctrl.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:141: CMakeFiles/rbc25_ctrl.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2
